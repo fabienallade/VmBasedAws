@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-    - 'infra/packer/frontend/**'
-#      - './../apps/fleetPortal/**'
+      - 'infra/packer/frontend/**'
+      - 'apps/frontend/fleetPortal/**'
 env:
   WORKING_DIRECTORY: "./src/packer/frontend"
   PACKER_VERSION: "1.9.4"
