@@ -10,7 +10,7 @@ on:
 env:
   WORKING_DIRECTORY: "./src/packer/frontend"
   PACKER_VERSION: "1.9.4"
-  ANGULAR_WORKING_DIRECTORY: "./apps/frontend/FleetPortal"
+  ANGULAR_WORKING_DIRECTORY: "./apps/frontend/fleetPortal"
 
 jobs:
   build:
