@@ -21,6 +21,6 @@ jobs:
         with:
           node-version: '20.x'
       - run: |
-          npm ci
+          npm install
           npm build --prod
           npm run test
