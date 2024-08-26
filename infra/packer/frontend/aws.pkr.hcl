@@ -2,7 +2,7 @@ data "amazon-ami" "ubuntu2204" {
   filters = {
     architecture        = "x86_64"
     virtualization-type = "hvm"
-    root-device-type   = "ebs"
+    root-device-type    = "ebs"
     name                = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
   }
   owners      = ["099720109477"]
