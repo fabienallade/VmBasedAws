@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - './../infra/packer/frontend/**'
-      - './../apps/fleetPortal/**'
+#      - './../apps/fleetPortal/**'
 env:
   WORKING_DIRECTORY: "./src/packer/frontend"
   PACKER_VERSION: "1.9.4"
