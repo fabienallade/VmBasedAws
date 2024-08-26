@@ -1,0 +1,16 @@
+name: Terraform-Init
+
+on:
+  push:
+    branches:
+      - main
+env:
+  WORKING_DIRECTORY: "./src/packer/backend"
+  PACKER_VERSION: "1.9.4"
+
+jobs:
+  build:
+    runs-on: vm-based-aws-runner
+    steps:
+      - uses: actions/checkout@v3
+

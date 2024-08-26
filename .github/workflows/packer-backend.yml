@@ -1,0 +1,19 @@
+name: Packer-Backend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - './infra/packer/backend/**'
+      - './apps/fleetApi/**'
+env:
+  WORKING_DIRECTORY: "./infra/packer/backend"
+  PACKER_VERSION: "1.9.4"
+
+jobs:
+  build:
+    runs-on: vm-based-aws-runner
+    steps:
+      - uses: actions/checkout@v3
+
