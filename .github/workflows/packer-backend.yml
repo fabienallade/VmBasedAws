@@ -27,7 +27,7 @@ jobs:
         working-directory: ${{ env.ADONIS_WORKING_DIRECTORY }}
         run: |
           npm install
-          npm ace build
+          node ace build
 
       - name: Generate Package
         run: zip -r ../deployment.zip ./
