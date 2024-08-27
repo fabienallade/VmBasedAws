@@ -11,6 +11,7 @@ env:
   WORKING_DIRECTORY: "./src/packer/frontend"
   PACKER_VERSION: "1.9.4"
   ANGULAR_WORKING_DIRECTORY: "./apps/frontend/fleetPortal"
+  PROJECT_NAME: "fleet-portal"
 
 jobs:
   build:
@@ -27,4 +28,7 @@ jobs:
         run: |
           npm ci
           npm run build --prod
-          npm run test
+
+      - name: Generate Package
+        run: zip -r ../deployment ./
+        working-directory: "${{env.ANGULAR_WORKING_DIRECTORY}}/dist/${{env.PROJECT_NAME}}"
