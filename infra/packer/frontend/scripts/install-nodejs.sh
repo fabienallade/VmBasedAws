@@ -6,5 +6,5 @@ apt-get install curl -y
 
 apt-get install nodejs -y
 
-apt-get install npm -y
+#apt-get install npm -y
 npm install -g pm2
