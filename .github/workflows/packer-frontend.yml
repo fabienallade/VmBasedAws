@@ -57,7 +57,7 @@ jobs:
         name: Check Path
         working-directory: ${{env.WORKING_DIRECTORY}}
         run: |
-          ipaddress = $(curl -s https://checkip.amazonaws.com)
+          ipaddress=$(curl -s https://checkip.amazonaws.com)
           echo $ipaddress
           echo "ipaddress=$ipaddress" >> "$GITHUB_OUTPUT"
 
