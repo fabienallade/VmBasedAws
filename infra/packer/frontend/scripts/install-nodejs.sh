@@ -11,7 +11,7 @@ node -v
 
 cat ~/.bashrc
 
-souce --help
+source --help
 #. $NVM_DIR/nvm.sh
 ## download and install Node.js (you may need to restart the terminal)
 #nvm install 20
