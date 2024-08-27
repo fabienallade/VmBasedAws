@@ -1,8 +1,8 @@
 # bin/bash
 
-apt install nginx -y
+apt-get install nginx -y
 
-sudo systemctl restart nginx
-sudo systemctl status nginx
+systemctl restart nginx
+systemctl status nginx
 
 pm2 startup systemd
