@@ -6,4 +6,4 @@ systemctl restart nginx
 systemctl status nginx
 systemctl reload nginx
 
-pm2 startup systemd
+#pm2 startup systemd
