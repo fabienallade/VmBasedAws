@@ -30,5 +30,11 @@ jobs:
           npm run build --prod
 
       - name: Generate Package
-        run: zip -r ../deployment ./
+        run: zip -r ../deployment.zip ./
         working-directory: "${{env.ANGULAR_WORKING_DIRECTORY}}/dist/${{env.PROJECT_NAME}}"
+
+      - name: Upload Deployment Package
+        uses: actions/upload-artifact@v2
+        with:
+          name: angular-deployment
+          path: ${{env.ANGULAR_WORKING_DIRECTORY}}/dist/deployment.zip
