@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/bin/bash -e
 apt-get install nginx -y
 
 systemctl restart nginx
