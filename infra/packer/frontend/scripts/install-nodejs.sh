@@ -9,18 +9,4 @@ apt-get install nodejs -y
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 apt-get install build-essential -y
 apt-get install npm -y
-
-node -v
-
-cat ~/.bashrc
-
-npm --version
-
-#. $NVM_DIR/nvm.sh
-## download and install Node.js (you may need to restart the terminal)
-#nvm install 20
-## verifies the right Node.js version is in the environment
-#
-##apt-get install npm -y
-#npm install -g pm2
-
+npm install -g pm2
