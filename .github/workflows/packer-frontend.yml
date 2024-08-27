@@ -8,7 +8,7 @@ on:
       - 'infra/packer/frontend/**'
       - 'apps/frontend/fleetPortal/**'
 env:
-  WORKING_DIRECTORY: "./src/packer/frontend"
+  WORKING_DIRECTORY: "./infra/packer/frontend"
   PACKER_VERSION: "1.9.4"
   ANGULAR_WORKING_DIRECTORY: "./apps/frontend/fleetPortal"
   PROJECT_NAME: "fleet-portal"
@@ -34,7 +34,7 @@ jobs:
         working-directory: "${{env.ANGULAR_WORKING_DIRECTORY}}/dist/${{env.PROJECT_NAME}}"
 
       - name: Upload Deployment Package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: angular-deployment
           path: ${{env.ANGULAR_WORKING_DIRECTORY}}/dist/deployment.zip
@@ -44,7 +44,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: angular-deployment
 
