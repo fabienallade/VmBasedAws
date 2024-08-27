@@ -38,3 +38,46 @@ jobs:
         with:
           name: angular-deployment
           path: ${{env.ANGULAR_WORKING_DIRECTORY}}/dist/deployment.zip
+
+  packer:
+    needs: [frontend-build]
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: angular-deployment
+
+      - id: image-version
+        name: Generate Version Number
+        run: |
+          echo "version=$(date+'%Y.%m').${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+
+      - id: agent-ipaddress
+        name: Check Path
+        working-directory: ${{env.WORKING_DIRECTORY}}
+        run: |
+          ipaddress = $(curl -s https://checkip.amazonaws.com)
+          echo $ipaddress
+          echo "ipaddress=$ipaddress" >> "$GITHUB_OUTPUT"
+
+      - name: Copy deployment Package
+        run: cp ./deployment.zip ${{env.WORKING_DIRECTORY}}/deployment.zip
+
+      - id: setup
+        name: Setup 'Packer'
+        uses: hashicorp/setup-packer@main
+        with:
+          version: ${{ env.PACKER_VERSION }}
+
+      - id: build
+        name: Packer Build
+        env:
+          AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          PKR_VAR_image_version: ${{ steps.image-version.outputs.version }}
+          PKR_VAR_agent_ipaddress: ${{ steps.agent-ipaddress.outputs.ipaddress }}
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: |
+          packer init ./
+          packer build -var-file=variables.pkrvars.hcl ./
