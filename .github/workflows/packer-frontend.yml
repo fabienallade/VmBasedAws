@@ -26,5 +26,5 @@ jobs:
         working-directory: ${{ env.ANGULAR_WORKING_DIRECTORY }}
         run: |
           npm ci
-          npm build --prod
+          npm run build --prod
           npm run test
