@@ -1,7 +1,7 @@
 # bin/bash
 
-apt update -y
-apt upgrade -y
+apt-get update -y
+apt-get upgrade -y
 
 curl-o-https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 # shellcheck disable=SC1090

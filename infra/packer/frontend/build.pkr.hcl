@@ -5,12 +5,12 @@ build {
 
   provisioner "shell" {
     execute_command = local.execute_command
-    script = "./scripts/install-nginx.sh"
+    script = "./scripts/install-nodejs.sh"
   }
 
   provisioner "shell" {
     execute_command = local.execute_command
-    script = "./scripts/install-nodejs.sh"
+    script = "./scripts/install-nginx.sh"
   }
 
   provisioner "shell" {
