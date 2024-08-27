@@ -17,4 +17,5 @@ source "amazon-ebs" "vm" {
   ssh_interface = "public_ip"
   communicator  = "ssh"
   source_ami    = data.amazon-ami.ubuntu2204.id
+  ssh_username = "ubuntu"
 }
