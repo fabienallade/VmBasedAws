@@ -28,14 +28,14 @@ build {
   provisioner "shell" {
     execute_command = local.execute_command
     inline = [
-      "unzip /tmp/deployment.zip -d /usr/share/nginx/html/fleetportal"
+      "unzip /tmp/deployment.zip -d /usr/share/nginx/html/fleetapi"
     ]
   }
 
   provisioner "shell" {
     execute_command = local.execute_command
     inline=[
-      "pm2 start /usr/share/nginx/html/fleetportal/server/server.mjs --name='ssr app'"
+      "pm2 start /usr/share/nginx/html/fleetapi/ace.js --name='ssr app'"
     ]
   }
 }
