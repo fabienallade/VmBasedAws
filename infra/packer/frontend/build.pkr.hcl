@@ -35,6 +35,8 @@ build {
   provisioner "shell" {
     execute_command = local.execute_command
     inline=[
+      "nvm install --lts",
+      "npm install -g pm2",
       "pm2 start /usr/share/nginx/html/fleetportal/server/main.js --name='ssr app'"
     ]
   }
