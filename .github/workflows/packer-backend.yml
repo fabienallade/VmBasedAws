@@ -6,14 +6,78 @@ on:
       - main
     paths:
       - 'infra/packer/backend/**'
-      - 'apps/frontend/fleetApi/**'
+      - 'apps/backend/fleetApi/**'
 env:
   WORKING_DIRECTORY: "./infra/packer/backend"
-  PACKER_VERSION: "1.9.4"
+  PACKER_VERSION: "1.11.2"
+  ADONIS_WORKING_DIRECTORY: "./apps/backend/fleetApi"
+  PROJECT_NAME: "fleet-api"
 
 jobs:
   build:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Use NodeJs
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
 
+      - name: Build
+        working-directory: ${{ env.ADONIS_WORKING_DIRECTORY }}
+        run: |
+          npm install
+          npm ace build
+
+      - name: Generate Package
+        run: zip -r ../deployment.zip ./
+        working-directory: "${{env.ADONIS_WORKING_DIRECTORY}}/build/"
+
+      - name: Upload Deployment Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: adonis-deployment
+          path: ${{env.ADONIS_WORKING_DIRECTORY}}/dist/deployment.zip
+
+  packer:
+    needs: [build]
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: adonis-deployment
+
+      - id: image-version
+        name: Generate Version Number
+        run: |
+          echo "version=$(date +'%Y.%m').${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+
+      - id: agent-ipaddress
+        name: Check Path
+        working-directory: ${{env.WORKING_DIRECTORY}}
+        run: |
+          ipaddress=$(curl -s https://checkip.amazonaws.com)
+          echo $ipaddress
+          echo "ipaddress=$ipaddress" >> "$GITHUB_OUTPUT"
+
+      - name: Copy deployment Package
+        run: cp ./deployment.zip ${{env.WORKING_DIRECTORY}}/deployment.zip
+
+      - id: setup
+        name: Setup 'Packer'
+        uses: hashicorp/setup-packer@main
+        with:
+          version: ${{ env.PACKER_VERSION }}
+
+      - id: build
+        name: Packer Build
+        env:
+          AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          PKR_VAR_image_version: ${{ steps.image-version.outputs.version }}
+          PKR_VAR_agent_ipaddress: ${{ steps.agent-ipaddress.outputs.ipaddress }}
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: |
+          packer init ./
+          packer build -var-file=variables.pkrvars.hcl ./

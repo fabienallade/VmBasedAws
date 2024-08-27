@@ -13,8 +13,9 @@ data "amazon-ami" "ubuntu2204" {
 source "amazon-ebs" "vm" {
   region        = var.aws_primary_region
   ami_name      = "${var.image_name}-${var.image_version}"
-  instance      = var.aws_instance_type
+  instance_type = var.aws_instance_type
   ssh_interface = "public_ip"
   communicator  = "ssh"
   source_ami    = data.amazon-ami.ubuntu2204.id
+  ssh_username = "ubuntu"
 }
