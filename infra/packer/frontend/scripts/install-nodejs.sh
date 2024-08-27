@@ -3,11 +3,8 @@ apt-get update -y
 apt-get upgrade -y
 
 apt-get install curl -y
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
-source ~/.bashrc
 
-nvm install --lts
+apt-get install nodejs -y
 
-nvm install node -y
-
+apt-get install npm -y
 npm install -g pm2
