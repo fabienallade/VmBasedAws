@@ -40,7 +40,7 @@ jobs:
           path: ${{env.ANGULAR_WORKING_DIRECTORY}}/dist/deployment.zip
 
   packer:
-    needs: [frontend-build]
+    needs: [build]
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
