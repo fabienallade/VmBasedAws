@@ -35,7 +35,7 @@ build {
   provisioner "shell" {
     execute_command = local.execute_command
     inline=[
-      "pm2 start /usr/share/nginx/html/fleetportal/server/main.js --name='ssr app'"
+      "pm2 start /usr/share/nginx/html/fleetportal/server/index.server.html --name='ssr app'"
     ]
   }
 }
