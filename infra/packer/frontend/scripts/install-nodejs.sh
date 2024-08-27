@@ -3,7 +3,7 @@ apt-get update -y
 apt-get upgrade -y
 
 apt-get install curl -y
-curl-o-https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 source ~/.bashrc
 
 nvm install --lts

@@ -19,4 +19,16 @@ build {
       "apt-get install unzip -y"
     ]
   }
+
+  provisioner "file" {
+    source = "./deployment.zip"
+    destination = "/tmp/deployment.zip"
+  }
+
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "unzip /tmp/deployment.zip -d /var/www/fleetportal"
+    ]
+  }
 }
