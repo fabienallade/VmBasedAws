@@ -9,6 +9,8 @@ apt-get install nodejs -y
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 node -v
 
+cat ~/.bashrc
+
 souce --help
 #. $NVM_DIR/nvm.sh
 ## download and install Node.js (you may need to restart the terminal)
