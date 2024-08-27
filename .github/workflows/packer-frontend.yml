@@ -9,7 +9,7 @@ on:
       - 'apps/frontend/fleetPortal/**'
 env:
   WORKING_DIRECTORY: "./infra/packer/frontend"
-  PACKER_VERSION: "1.9.4"
+  PACKER_VERSION: "1.11.2"
   ANGULAR_WORKING_DIRECTORY: "./apps/frontend/fleetPortal"
   PROJECT_NAME: "fleet-portal"
 
