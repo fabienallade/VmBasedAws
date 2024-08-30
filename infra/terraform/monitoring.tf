@@ -3,8 +3,9 @@ data "aws_iam_policy_document" "vpc_assume_role" {
   statement {
     effect = "Allow"
 
+
     principals {
-      identifiers = ["vpc-flow-logs.amazonaws.com"]
+      identifiers = ["arn:aws:iam::730335223138:user/work"]
       type        = "Service"
     }
 
