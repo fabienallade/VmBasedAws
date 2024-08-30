@@ -23,6 +23,7 @@ data "aws_iam_policy_document" "cloudwatch" {
     effect = "Allow"
     actions = [
       "logs:CreateLogGroup",
+      "logs:TagResource"
     ]
     resources = ["*"]
   }
