@@ -21,7 +21,15 @@ data "aws_iam_policy_document" "cloudwatch" {
   version = "2012-10-17"
   statement {
     effect = "Allow"
-    actions = []
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:DescribeLogGroups",
+      "logs:DescribeLogStreams",
+      "logs:PutLogEvents",
+      "logs:GetLogEvents",
+      "logs:FilterLogEvents"
+    ]
     resources = []
   }
 }
