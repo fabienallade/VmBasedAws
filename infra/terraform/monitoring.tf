@@ -30,13 +30,13 @@ resource "aws_iam_role_policy" "cloudwatch" {
   role   = aws_iam_role.vpc.id
 }
 
-resource "aws_cloudwatch_log_group" "vpc" {
-  name = "${var.application_name}-${var.environment_name}-network-cloudwatch"
-}
-
-resource "aws_flow_log" "main" {
-  iam_role_arn    = aws_iam_role.vpc.arn
-  log_destination = aws_cloudwatch_log_group.vpc.arn
-  traffic_type    = "ALL"
-  vpc_id          = aws_vpc.main.id
-}
+# resource "aws_cloudwatch_log_group" "vpc" {
+#   name = "${var.application_name}-${var.environment_name}-network-cloudwatch"
+# }
+#
+# resource "aws_flow_log" "main" {
+#   iam_role_arn    = aws_iam_role.vpc.arn
+#   log_destination = aws_cloudwatch_log_group.vpc.arn
+#   traffic_type    = "ALL"
+#   vpc_id          = aws_vpc.main.id
+# }
