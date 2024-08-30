@@ -52,6 +52,10 @@ data "cloudinit_config" "frontend" {
     content_type = "text/cloud-config"
     content      = <<-EOF
                    #cloud-config
+                   write_files:
+                     - path: /etc/profile.d/backend_endpoint.sh
+                       content: |
+                         export BackendEndpoint="${aws_lb.backend.dns_name}"
                    EOF
   }
 }
