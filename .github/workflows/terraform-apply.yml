@@ -37,8 +37,6 @@ jobs:
           -backend-config='bucket='$BACKEND_BUCKET_NAME \
           -backend-config='region='$BACKEND_REGION \
           -backend-config="key=aws-vm-sample"
-        
-        terraform plan -destroy
 
         terraform apply -target "random_shuffle.az" -auto-approve
         terraform apply -destroy -auto-approve

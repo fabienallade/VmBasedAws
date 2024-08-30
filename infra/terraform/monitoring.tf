@@ -16,20 +16,20 @@ resource "aws_iam_role" "vpc" {
   name               = "${var.application_name}-${var.environment_name}-network"
   assume_role_policy = data.aws_iam_policy_document.vpc_assume_role.json
 }
-
-data "aws_iam_policy_document" "cloudwatch" {
-  version = "2012-10-17"
-  statement {
-    effect = "Allow"
-    actions = [
-      "logs:CreateLogGroup",
-    ]
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_role_policy" "cloudwatch" {
-  name   = "${var.application_name}-${var.environment_name}-network-cloudwatch"
-  policy = data.aws_iam_policy_document.cloudwatch.json
-  role   = aws_iam_role.vpc.id
-}
+#
+# data "aws_iam_policy_document" "cloudwatch" {
+#   version = "2012-10-17"
+#   statement {
+#     effect = "Allow"
+#     actions = [
+#       "logs:CreateLogGroup",
+#     ]
+#     resources = ["*"]
+#   }
+# }
+#
+# resource "aws_iam_role_policy" "cloudwatch" {
+#   name   = "${var.application_name}-${var.environment_name}-network-cloudwatch"
+#   policy = data.aws_iam_policy_document.cloudwatch.json
+#   role   = aws_iam_role.vpc.id
+# }
