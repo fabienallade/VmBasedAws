@@ -12,13 +12,13 @@ jobs:
   terraform-destroy:
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - id: setup
       name: Setup `terraform`
-      uses: hashicorp/setup-terraform@main
+      uses: hashicorp/setup-terraform@v3
       with:
-        version: ${{ env.TERRAFORM_VERSION }}
+        terraform_version: ${{ env.TERRAFORM_VERSION }}
 
     - id: destroy
       name: Terraform Destroy
