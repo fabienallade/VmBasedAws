@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "vpc_assume_role" {
 }
 
 resource "aws_iam_role" "vpc" {
-  name               = "${var.application_name}-${var.environment_name}-networks"
+  name               = "${var.application_name}-${var.environment_name}-network"
   assume_role_policy = data.aws_iam_policy_document.vpc_assume_role.json
 }
 

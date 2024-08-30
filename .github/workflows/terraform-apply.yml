@@ -38,5 +38,4 @@ jobs:
           -backend-config='region='$BACKEND_REGION \
           -backend-config="key=aws-vm-sample"
 
-        
         terraform destroy
