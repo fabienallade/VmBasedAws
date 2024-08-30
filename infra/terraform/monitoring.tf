@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "cloudwatch" {
       "logs:CreateLogGroup",
       "logs:TagResource"
     ]
-    resources = ["*"]
+#     resources = ["*"]
   }
 }
 
