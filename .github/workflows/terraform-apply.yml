@@ -38,4 +38,5 @@ jobs:
           -backend-config='region='$BACKEND_REGION \
           -backend-config="key=aws-vm-sample"
 
-        terraform destroy
+        terraform apply -target "random_shuffle.az" -auto-approve
+        terraform apply -auto-approve
