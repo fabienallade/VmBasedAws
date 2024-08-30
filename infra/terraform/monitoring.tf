@@ -1,41 +1,41 @@
-data "aws_iam_policy_document" "vpc_assume_role" {
-  statement {
-    effect = "Allow"
-
-    principals {
-      identifiers = ["vpc-flow-logs?amazonaws.com"]
-      type        = "Service"
-    }
-
-    actions = ["sts:AssumeRole"]
-  }
-}
-
-resource "aws_iam_role" "vpc" {
-  name               = "${var.application_name}-${var.environment_name}-network"
-  assume_role_policy = data.aws_iam_policy_document.vpc_assume_role.json
-}
-
-data "aws_iam_policy_document" "cloudwatch" {
-  statement {
-    effect = "Allow"
-    actions = [
-      "logs:CreateLogStream",
-      "logs:CreateLogGroup",
-      "logs:PutLogEvents",
-#       "logs:DescribeLogGroups",
-      "logs:DescribeLogStreams",
-    ]
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_role_policy" "cloudwatch" {
-  name   = "${var.application_name}-${var.environment_name}-network-cloudwatch"
-  policy = data.aws_iam_policy_document.cloudwatch.json
-  role   = aws_iam_role.vpc.id
-}
-
+# data "aws_iam_policy_document" "vpc_assume_role" {
+#   statement {
+#     effect = "Allow"
+#
+#     principals {
+#       identifiers = ["vpc-flow-logs?amazonaws.com"]
+#       type        = "Service"
+#     }
+#
+#     actions = ["sts:AssumeRole"]
+#   }
+# }
+#
+# resource "aws_iam_role" "vpc" {
+#   name               = "${var.application_name}-${var.environment_name}-network"
+#   assume_role_policy = data.aws_iam_policy_document.vpc_assume_role.json
+# }
+#
+# data "aws_iam_policy_document" "cloudwatch" {
+#   statement {
+#     effect = "Allow"
+#     actions = [
+#       "logs:CreateLogStream",
+#       "logs:CreateLogGroup",
+#       "logs:PutLogEvents",
+# #       "logs:DescribeLogGroups",
+#       "logs:DescribeLogStreams",
+#     ]
+#     resources = ["*"]
+#   }
+# }
+#
+# resource "aws_iam_role_policy" "cloudwatch" {
+#   name   = "${var.application_name}-${var.environment_name}-network-cloudwatch"
+#   policy = data.aws_iam_policy_document.cloudwatch.json
+#   role   = aws_iam_role.vpc.id
+# }
+#
 # resource "aws_cloudwatch_log_group" "vpc" {
 #   name = "${var.application_name}-${var.environment_name}-network-cloudwatch"
 # }
