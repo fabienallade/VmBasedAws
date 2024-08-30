@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "cloudwatch" {
   statement {
     effect = "Allow"
     actions = []
-    resources = ["*"]
+    resources = []
   }
 }
 
