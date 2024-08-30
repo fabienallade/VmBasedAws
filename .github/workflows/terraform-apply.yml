@@ -1,18 +1,42 @@
-name: Terraform-Init
-
+name: Terraform-Apply
 on:
   push:
     branches:
-      - main
+    - main
     paths:
-      - './infra/terraform/**'
+    - 'infra/terraform/**'
+
 env:
-  WORKING_DIRECTORY: "./src/packer/backend"
-  PACKER_VERSION: "1.9.4"
+  TERRAFORM_VERSION: '1.5.7'
+  WORKING_DIRECTORY: "./infra/terraform"
 
 jobs:
-  build:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v3
 
+  terraform-apply:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - id: setup
+      name: Setup `terraform`
+      uses: hashicorp/setup-terraform@main
+      with:
+        version: ${{ env.TERRAFORM_VERSION }}
+
+    - id: apply
+      name: Terraform Apply
+      env:
+        AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        BACKEND_BUCKET_NAME: ${{ vars.BUCKET_NAME }}
+        BACKEND_REGION: ${{ vars.BUCKET_REGION }}
+        TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+      working-directory: ${{ env.WORKING_DIRECTORY }}
+      run: |
+        terraform init \
+          -backend-config='bucket='$BACKEND_BUCKET_NAME \
+          -backend-config='region='$BACKEND_REGION \
+          -backend-config="key=aws-vm-sample"
+
+        terraform apply -target "random_shuffle.az" -auto-approve
+        terraform apply -auto-approve
