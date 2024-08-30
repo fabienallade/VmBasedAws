@@ -18,6 +18,7 @@ jobs:
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: ${{ env.TERRAFORM_VERSION }}
+        terraform_wrapper: false
 
     - id: destroy
       name: Terraform Destroy
@@ -29,6 +30,9 @@ jobs:
         TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
       working-directory: ${{ env.WORKING_DIRECTORY }}
       run: |
-        terraform init
+        terraform init \
+          -backend-config='bucket='$BACKEND_BUCKET_NAME \
+          -backend-config='region='$BACKEND_REGION \
+          -backend-config="key=aws-vm-sample"
 
         terraform destroy -auto-approve
