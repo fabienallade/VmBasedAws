@@ -19,13 +19,7 @@ resource "aws_iam_role" "vpc" {
 data "aws_iam_policy_document" "cloudwatch" {
   statement {
     effect = "Allow"
-    actions = [
-      "logs:CreateLogStream",
-      "logs:CreateLogGroup",
-      "logs:PutLogEvents",
-#       "logs:DescribeLogGroups",
-      "logs:DescribeLogStreams",
-    ]
+    actions = []
     resources = ["*"]
   }
 }
