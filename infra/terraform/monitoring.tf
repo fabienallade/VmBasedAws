@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "cloudwatch" {
       "logs:CreateLogStream",
       "logs:CreateLogGroup",
       "logs:PutLogEvents",
-      "logs:DescribeLogGroups",
+#       "logs:DescribeLogGroups",
       "logs:DescribeLogStreams",
     ]
     resources = ["*"]
