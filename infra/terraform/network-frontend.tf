@@ -1,8 +1,8 @@
 resource "aws_subnet" "frontend" {
-  for_each = local.public_subnets
-  vpc_id = aws_vpc.main.id
+  for_each          = local.public_subnets
+  vpc_id            = aws_vpc.main.id
   availability_zone = each.value.availability_zone
-  cidr_block = each.value.cidr_block
+  cidr_block        = each.value.cidr_block
 }
 
 resource "aws_route_table" "frontend" {
@@ -16,6 +16,6 @@ resource "aws_route_table" "frontend" {
 resource "aws_route_table_association" "frontend" {
   for_each = aws_subnet.frontend
 
-  subnet_id = each.value.id
+  subnet_id      = each.value.id
   route_table_id = aws_route_table.frontend.id
 }

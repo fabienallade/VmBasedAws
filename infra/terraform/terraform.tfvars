@@ -1,0 +1,10 @@
+application_name       = "fleet-portal"
+environment_name       = "dev"
+primary_region         = "eu-west-3"
+frontend_image_name    = "frontend-2024.08.30"
+frontend_instance_type = "t2.micro"
+backend_image_name     = "backend-2024.08.30"
+backend_instance_type  = "t2.micro"
+domain_name            = ""
+vpc_cidr_block         = "10.0.0.0/16"
+az_count               = 2
